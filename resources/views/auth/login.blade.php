@@ -1,8 +1,8 @@
-@extends('dashboard')
+@extends('layouts.app')
 
 @section('content')
 
-<main class="login-form">
+<main class="login-form mt-5">
     <div class="cotainer">
         <div class="row justify-content-center">
             <div class="col-md-4">
@@ -20,7 +20,7 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <input type="password" placeholder="Password" id="password" class="form-control" name="password" required>
+                                <input type="password" placeholder="Password" id="cpassword" class="form-control" name="password" required>
                                 @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                                 @endif

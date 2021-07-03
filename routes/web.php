@@ -31,4 +31,6 @@ Route::name('user.')->group(function () {
 
 Route::middleware('check.login')->group(function () {
     Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
+
+    
 });
