@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\TrainerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,5 +33,12 @@ Route::name('user.')->group(function () {
 Route::middleware('check.login')->group(function () {
     Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
 
-    
+    Route::name('trainer.')->group(function () {
+        Route::get('/trainers', [TrainerController::class, 'index'])->name('list');
+        Route::prefix('trainer')->group(function () {
+            Route::get('/edit/{id}', [TrainerController::class, 'edit_view'])->name('edit');
+            Route::post('/custom-edit', [TrainerController::class, 'edit'])->name('custom.edit');
+            Route::get('/new', [TrainerController::class, 'create_view'])->name('create');
+        });
+    });
 });

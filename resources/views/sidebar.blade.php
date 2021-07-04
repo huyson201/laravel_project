@@ -43,29 +43,24 @@
                     <span class="menu-collapsed">Password</span>
                 </a>
             </div>
-            <a href="#" class="bg-dark list-group-item list-group-item-action">
+
+            <a href="#submenu3" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-tasks fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Tasks</span>
+                    <span class="fa fa-users fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Trainers</span>
+                    <span class="submenu-icon ml-auto"></span>
                 </div>
             </a>
-            {{-- <!-- Separator with title -->
-            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
-                <small>OPTIONS</small>
-            </li>
-            <!-- /END Separator -->
-            <a href="#" class="bg-dark list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-calendar fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Calendar</span>
-                </div>
-            </a>
-            <a href="#" class="bg-dark list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-envelope-o fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Messages <span class="badge badge-pill badge-primary ml-2">5</span></span>
-                </div>
-            </a> --}}
+            <!-- Submenu content -->
+            <div id='submenu3' class="collapse sidebar-submenu">
+                <a href="{{route('trainer.list')}}" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">List of all trainers</span>
+                </a>
+                <a href="{{route('trainer.create')}}" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Add new</span>
+                </a>
+            </div>
+
             <!-- Separator without title -->
             <li class="list-group-item sidebar-separator menu-collapsed"></li>
             <!-- /END Separator -->
