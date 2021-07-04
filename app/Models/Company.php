@@ -13,8 +13,8 @@ class Company extends Model
         'company_name',
         'company_web',
         'company_address',
-        'company_code',
         'company_phone',
+        'company_code',
     ];
     public function categories()
     {

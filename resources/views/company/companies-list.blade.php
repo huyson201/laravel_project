@@ -6,7 +6,7 @@
     <table class="table table-bordered">
         <thead>
           <tr>
-            <th scope="col">Id</th>
+            <th scope="col">ID</th>
             <th scope="col">Company Name</th>
             <th scope="col">Company Web</th>
             <th scope="col">Company Address</th>

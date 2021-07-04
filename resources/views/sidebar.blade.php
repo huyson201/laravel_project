@@ -72,7 +72,7 @@
                 <a href="{{route('company.list')}}" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">List</span>
                 </a>
-                <a href="{{route('trainer.create')}}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{route('company.create')}}" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Add new</span>
                 </a>
             </div>
