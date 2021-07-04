@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TrainerSeeder::class,
             CompanySeeder::class,
+            CategorySeeder::class,
         ]);
     }
 }

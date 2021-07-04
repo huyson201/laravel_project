@@ -46,3 +46,4 @@ class TrainerController extends Controller
         return redirect()->route('trainer.list');
     }
 }
+

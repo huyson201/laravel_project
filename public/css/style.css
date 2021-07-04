@@ -67,3 +67,7 @@
     text-align: right;
     padding-left: 10px;
 }
+/* Middle row of table*/
+.table-bordered thead th,.table-bordered td,.table-bordered th {
+    vertical-align: middle !important;
+}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TrainerController;
@@ -39,6 +40,14 @@ Route::middleware('check.login')->group(function () {
             Route::get('/edit/{id}', [TrainerController::class, 'edit_view'])->name('edit');
             Route::post('/custom-edit', [TrainerController::class, 'edit'])->name('custom.edit');
             Route::get('/new', [TrainerController::class, 'create_view'])->name('create');
+        });
+    });
+    Route::name('company.')->group(function () {
+        Route::get('/companies', [CompanyController::class, 'index'])->name('list');
+        Route::prefix('companies')->group(function () {
+            Route::get('/edit/{id}', [CompanyController::class, 'edit_view'])->name('edit');
+            Route::post('/custom-edit', [CompanyController::class, 'edit'])->name('custom.edit');
+            Route::get('/new', [CompanyController::class, 'create_view'])->name('create');
         });
     });
 });
