@@ -51,6 +51,7 @@ Route::middleware('check.login')->group(function () {
             Route::get('/edit/{id}', [CompanyController::class, 'edit_view'])->name('edit');
             Route::post('/custom-edit', [CompanyController::class, 'edit'])->name('custom.edit');
             Route::get('/new', [CompanyController::class, 'create_view'])->name('create');
+            Route::get('/create', [CompanyController::class, 'create'])->name('custom.create');
         });
     });
 });

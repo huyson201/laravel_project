@@ -3,6 +3,9 @@
  <!-- MAIN -->
  <div class="col p-4">
     <h1 class="display-4">List of all companies</h1>
+    <div class="message">
+      <div class="text-success delete mb-3">{{ session('message') }}</div>
+  </div>
     <table class="table table-bordered">
         <thead>
           <tr>

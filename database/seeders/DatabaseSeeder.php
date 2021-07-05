@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             [
                 'user_name'    =>      "huyson123vn",
                 'user_email'    =>      'admin@admin.com',
-                'user_password' =>       Hash::make('asdasd123')
+                'user_password' =>       Hash::make('123456')
             ]
         );
         $this->call([
