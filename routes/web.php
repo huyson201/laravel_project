@@ -36,10 +36,13 @@ Route::middleware('check.login')->group(function () {
 
     Route::name('trainer.')->group(function () {
         Route::get('/trainers', [TrainerController::class, 'index'])->name('list');
+        Route::get('/trainers/search', [TrainerController::class, 'search'])->name('search');
         Route::prefix('trainer')->group(function () {
-            Route::get('/edit/{id}', [TrainerController::class, 'edit_view'])->name('edit');
+            Route::get('/edit/{id}', [TrainerController::class, 'edit_view'])->name('edit')->where('id', '[0-9]+');
             Route::post('/custom-edit', [TrainerController::class, 'edit'])->name('custom.edit');
             Route::get('/new', [TrainerController::class, 'create_view'])->name('create');
+            Route::get('/create', [TrainerController::class, 'create'])->name('custom.create');
+            Route::get('delete/{id}', [TrainerController::class, 'delete'])->name('delete')->where('id', '[0-9]+');
         });
     });
     Route::name('company.')->group(function () {

@@ -44,12 +44,16 @@ class LoginController extends Controller
             ];
         }
 
-        if (Auth::attempt($credential)) {
-            $remember = $request->has('remember') ? true : false;
-            Auth::login(Auth::user(), $request);
+        if (Auth::attempt($credential, false)) {
+            // $remember = $request->has('remember') ? true : false;
+            // if ($remember) {
+            //     Auth::login(Auth::user(), $request);
+            //     dd($remember);
+            // }
+            return redirect()->route('dashboard');
         }
 
-        return redirect()->route('dashboard');
+        return redirect()->route('user.loginView')->with("login-error", "your email (user name) / password invalid!");
     }
 
     /**

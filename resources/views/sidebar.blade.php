@@ -11,7 +11,8 @@
             </li>
             <!-- /END Separator -->
             <!-- Menu with submenu -->
-            <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+            <a href="#submenu1" data-toggle="collapse" aria-expanded="false"
+                class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-dashboard fa-fw mr-3"></span>
                     <span class="menu-collapsed">Dashboard</span>
@@ -27,7 +28,8 @@
                     <span class="menu-collapsed">Tables</span>
                 </a>
             </div>
-            <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+            <a href="#submenu2" data-toggle="collapse" aria-expanded="false"
+                class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-user fa-fw mr-3"></span>
                     <span class="menu-collapsed">Profile</span>
@@ -44,7 +46,8 @@
                 </a>
             </div>
 
-            <a href="#submenu3" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+            <a href="#submenu3" data-toggle="collapse" aria-expanded="false"
+                class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-users fa-fw mr-3"></span>
                     <span class="menu-collapsed">Trainers</span>
@@ -53,10 +56,11 @@
             </a>
             <!-- Submenu content -->
             <div id='submenu3' class="collapse sidebar-submenu">
-                <a href="{{route('trainer.list')}}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('trainer.list') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">List of all trainers</span>
                 </a>
-                <a href="{{route('trainer.create')}}" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('trainer.create') }}"
+                    class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Add new</span>
                 </a>
             </div>
@@ -85,7 +89,8 @@
                     <span class="menu-collapsed">Help</span>
                 </div>
             </a>
-            <a href="#top" data-toggle="sidebar-colapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
+            <a href="#top" data-toggle="sidebar-colapse"
+                class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span id="collapse-icon" class="fa fa-2x mr-3"></span>
                     <span id="collapse-text" class="menu-collapsed">Collapse</span>

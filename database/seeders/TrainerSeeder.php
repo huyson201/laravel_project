@@ -14,14 +14,6 @@ class TrainerSeeder extends Seeder
      */
     public function run()
     {
-        //
-        for ($i = 0; $i < 20; $i++) {
-            Trainer::insert([
-                'trainer_name' => 'trainer name ' . $i,
-                'trainer_phone' => '0165478547' . $i,
-                'trainer_address'   => 'TP. HCM',
-                'company_id'        => $i + 1,
-            ]);
-        }
+        \App\Models\Trainer::factory(20)->create();
     }
 }
