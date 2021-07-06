@@ -2,7 +2,21 @@
 @section('main')
  <!-- MAIN -->
  <div class="col p-4">
-    <h1 class="display-4">List of all companies</h1>
+  <div class="row">
+    <div class="col-md-6">
+        <h1 class="display-4">List of all companies</h1>
+    </div>
+    <div class="col-md-6 d-flex  align-items-center justify-content-center">
+        <form action="" method="get" style="margin-bottom: 0; width:80%;">
+            <div class="d-flex">
+                <input type="text" name="k" id="" class="form-control" placeholder="Enter your search key..."
+                    value="" >
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search"
+                        aria-hidden="true"></i></button>
+            </div>
+        </form>
+    </div>
+</div>
     <div class="message">
       <div class="text-success delete mb-3">{{ session('message') }}</div>
   </div>
@@ -35,7 +49,7 @@
             </td>
             <td>
                 <a href="{{route('company.edit', [$company->company_id])}}" class="btn btn-success">Edit</a>
-                <a href="#" class="btn btn-danger" onclick="confirm('are you sure want to delete?')">Delete</a>
+                <a href="{{ route('company.delete', [$company->company_id]) }}" class="btn btn-danger" onclick="confirm('Are you sure want to delete [{{$company->company_name}}] ?')">Delete</a>
             </td>
           </tr>
           @endforeach

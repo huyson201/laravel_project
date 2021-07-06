@@ -4,7 +4,7 @@
         <!-- MAIN -->
         <div class="col p-4">
             <h1 class="display-4">Edit Company</h1>
-            {{-- <p class="text-success"> {{ session('success') }}</p> --}}
+            <p class="text-success"> {{ session('success') }}</p>
             <main class="signup-form mt-5">
                 <div class="cotainer">
                     <div class="row justify-content-center">
@@ -25,6 +25,9 @@
                                             <input type="text" placeholder="Web" id="web" class="form-control"
                                                 name="company_web" value="{{ $company->company_web }}" required autofocus>
                                         </div>
+                                        @error('company_web')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                         <div class="form-group mb-3">
                                             <label for="address">Address</label>
                                             <input type="text" placeholder="Name" id="address" class="form-control"
@@ -36,21 +39,24 @@
                                             <input type="text" placeholder="Name" id="phone" class="form-control"
                                                 name="company_phone" value="{{ $company->company_phone }}" required
                                                 autofocus>
-                                            <div class="form-group mb-3">
-                                                <label for="address">Code</label>
-                                                <input type="text" placeholder="Code" id="code" class="form-control"
-                                                    name="company_code" value="{{ $company->company_address }}" required
-                                                    autofocus>
-                                            </div>
-                                            @error('company_phone')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
+
 
                                         </div>
-
+                                        @error('company_phone')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                        <div class="form-group mb-3">
+                                            <label for="address">Code</label>
+                                            <input type="text" placeholder="Code" id="code" class="form-control"
+                                                name="company_code" value="{{ $company->company_code }}" required
+                                                autofocus>
+                                        </div>
+                                        @error('company_code')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                         <div class="form-group mb-3">
                                             <label for="category">Category</label>
-                                            {!! Form::select('category_id', $categories, $categories, ['class' => 'form-control', 'id' => 'category']) !!}
+                                            {!! Form::select('category_id', $categories, $selected, ['multiple' => 'multiple', 'name' => 'categories[]', 'class' => 'form-control', 'id' => 'category']) !!}
                                         </div>
                                         <div class="d-grid mx-auto">
                                             <button type="submit" class="btn btn-dark btn-block">Update</button>
@@ -116,7 +122,7 @@
                                         @enderror
                                         <div class="form-group mb-3">
                                             <label for="category">Category</label>
-                                            {!! Form::select('category_id', $categories, $categories, ['class' => 'form-control', 'id' => 'category']) !!}
+                                            {!! Form::select('category_id', $categories, $categories, ['multiple' => 'multiple', 'name' => 'categories[]', 'class' => 'form-control', 'id' => 'category']) !!}
                                         </div>
                                         <div class="d-grid mx-auto">
                                             <button type="submit" class="btn btn-dark btn-block">Add</button>
