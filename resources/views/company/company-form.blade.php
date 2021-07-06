@@ -56,7 +56,7 @@
                                         @enderror
                                         <div class="form-group mb-3">
                                             <label for="category">Category</label>
-                                            {!! Form::select('category_id', $categories, $selected, ['multiple' => 'multiple', 'name' => 'categories[]', 'class' => 'form-control', 'id' => 'category']) !!}
+                                            {!! Form::select('category_id', $categories, $selected, ['multiple' => 'multiple', 'name' => 'categories[]', 'class' => 'form-control', 'id' => 'category', 'required']) !!}
                                         </div>
                                         <div class="d-grid mx-auto">
                                             <button type="submit" class="btn btn-dark btn-block">Update</button>
@@ -122,7 +122,7 @@
                                         @enderror
                                         <div class="form-group mb-3">
                                             <label for="category">Category</label>
-                                            {!! Form::select('category_id', $categories, $categories, ['multiple' => 'multiple', 'name' => 'categories[]', 'class' => 'form-control', 'id' => 'category']) !!}
+                                            {!! Form::select('category_id', $categories, $categories, ['multiple' => 'multiple', 'name' => 'categories[]', 'class' => 'form-control', 'id' => 'category','required']) !!}
                                         </div>
                                         <div class="d-grid mx-auto">
                                             <button type="submit" class="btn btn-dark btn-block">Add</button>

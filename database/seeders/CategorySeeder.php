@@ -14,11 +14,6 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        //
-        for ($i = 0; $i < 5; $i++) {
-            Category::insert([
-                'category_name' => 'Type' . $i,
-            ]);
-        }
+        \App\Models\Category::factory(10)->create();
     }
 }

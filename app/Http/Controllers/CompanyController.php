@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+
 class CompanyController extends Controller
 {
     //
@@ -41,8 +42,12 @@ class CompanyController extends Controller
     public function edit_view($id)
     {
         $company = Company::find($id);
-        for ($i = 1; $i <= count($company->categories()->get()); $i++) {
-            $selected[$i] = $i;
+        if (count($company->categories()->get()) > 0) {
+            for ($i = 1; $i <= count($company->categories()->get()); $i++) {
+                $selected[$i] = $i;
+            };
+        } else {
+            $selected = '';
         };
         $categories = Category::pluck('category_name', 'category_id');
         return view('company.company-form', ['company' => $company, 'categories' => $categories, 'selected' => $selected]);
@@ -59,12 +64,13 @@ class CompanyController extends Controller
         $company = Company::find($request->company_id);
         $company->update($data);
         $company->categories()->sync($request->categories);
-        return redirect()->route('company.edit',[$request->company_id])->with('success', 'Updated successfully!');
+        return redirect()->route('company.edit', [$request->company_id])->with('success', 'Updated successfully!');
     }
-    
+
     public function delete($id)
     {
         Company::find($id)->delete();
         return redirect()->route('company.list')->with('message', 'Deleted successfully!');
     }
+    
 }
