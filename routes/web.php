@@ -62,6 +62,8 @@ Route::middleware('check.login')->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('list');
          Route::get('/users/search', [UserController::class, 'search'])->name('search');
         Route::prefix('users')->group(function () {
+            Route::get('/new', [UserController::class, 'create_view'])->name('create');
+            Route::get('/create', [UserController::class, 'create'])->name('custom.create');
             Route::get('/edit/{id}', [UserController::class, 'edit_view'])->name('edit');;
             Route::post('/custom-edit', [UserController::class, 'edit'])->name('custom.edit');
             Route::get('delete/{id}', [UserController::class, 'delete'])->name('delete');

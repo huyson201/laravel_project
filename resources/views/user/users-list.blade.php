@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="message">
-            <div class="text-success delete mb-3">{{ session('add-message') }}</div>
+            <div class="text-success delete mb-3">{{ session('message') }}</div>
             <div class="text-success delete mb-3">{{ session('delete-message') }}</div>
         </div>
         <table class="table table-bordered">

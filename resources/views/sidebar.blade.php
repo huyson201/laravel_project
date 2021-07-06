@@ -41,7 +41,7 @@
                 <a href="{{route('user.list')}}" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">List of all users</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="{{ route('user.create') }}" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Add new</span>
                 </a>
             </div>

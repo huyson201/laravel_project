@@ -27,23 +27,22 @@ class UserController extends Controller
     public function edit(Request $request)
     {
         $message = 'Updated failed!';
-        $hashedPw = Auth::user()->user_password;
-        $id = Auth::user()->user_id;
+        $user = User::find($request->user_id);
         $request->validate([
             'user_name'    => 'required',
-            'user_email'    => ['required', 'unique:users,user_email,' . $id . ',user_id', 'regex:/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'],
+            'user_email'    => ['required', 'unique:users,user_email,' . $user->user_id . ',user_id', 'regex:/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'],
             'user_password'    => 'required|min:6',
             'user_cfpassword' => 'required|min:6'
         ]);
         $data = $request->only('user_name', 'user_email', 'user_password');
-        if ($data['user_password'] != $hashedPw) {
+        if ($data['user_password'] != $user->user_password) {
             $data['user_password'] = Hash::make($request->user_password);
             if (Hash::check($request->user_cfpassword, $data['user_password'])) {
-                User::find($request->user_id)->update($data);
+                $user->update($data);
                 $message = 'Updated successfully!';
             }
         } else {
-            User::find($request->user_id)->update($data);
+            $user->update($data);
             $message = 'Updated successfully!';
         }
 
@@ -60,6 +59,31 @@ class UserController extends Controller
     public function delete($id)
     {
         User::find($id)->delete();
-        return redirect()->route('user.list')->with('message', 'Deleted successfully!');
+        return redirect()->route('user.list')->with('delete-message', 'Deleted successfully!');
+    }
+
+    public function create_view()
+    {
+        return view('user.user-form');
+    }
+
+    public function create(Request $request)
+    {
+        $message = "Created user failed!";
+        $request->validate([
+            'user_name' =>  ['required', 'unique:users,user_name'],
+            'user_email'    => ['required', 'unique:users,user_email', 'regex:/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'],
+            'user_password'    => 'required|min:6',
+            'user_cfpassword' => 'required|min:6'
+        ]);
+
+        $data = $request->only('user_name', 'user_email', 'user_password');
+        if ($request->user_cfpassword === $data['user_password']) {
+            $data['user_password'] = Hash::make($request->user_password);
+            if (User::create($data)) {
+                $message = "Created user successfully!";
+            }
+        }
+        return redirect()->route('user.list')->with('message', $message);
     }
 }
