@@ -72,5 +72,22 @@ class CompanyController extends Controller
         Company::find($id)->delete();
         return redirect()->route('company.list')->with('message', 'Deleted successfully!');
     }
-    
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'k'     => 'required'
+        ]);
+
+        $key = $request->k;
+
+        $companies = Company::whereHas('categories', function (Builder $query) use ($key) {
+            return $query->where('category_name', 'LIKE', "%{$key}%");
+        })->orWhere('company_name', 'Like', "%{$key}%")
+            ->orWhere('company_phone', 'Like', "%{$key}%")
+            ->orWhere('company_address',  'Like', "%{$key}%")
+            ->orWhere('company_web',  'Like', "%{$key}%")
+            ->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
+        return view('company.companies-list', ['companies' => $companies]);
+    }
 }

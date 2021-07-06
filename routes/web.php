@@ -47,6 +47,7 @@ Route::middleware('check.login')->group(function () {
     });
     Route::name('company.')->group(function () {
         Route::get('/companies', [CompanyController::class, 'index'])->name('list');
+        Route::get('/companies/search', [CompanyController::class, 'search'])->name('search');
         Route::prefix('companies')->group(function () {
             Route::get('/new', [CompanyController::class, 'create_view'])->name('create');
             Route::get('/create', [CompanyController::class, 'create'])->name('custom.create');
