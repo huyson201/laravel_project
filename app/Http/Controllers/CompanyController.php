@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Company;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
 
 class CompanyController extends Controller
 {
@@ -13,8 +12,9 @@ class CompanyController extends Controller
 
     public function index()
     {
+        $categories = Category::pluck('category_name', 'category_id');
         $companies = Company::orderBy('company_id', 'DESC')->paginate(12);
-        return view('company.companies-list', ['companies' => $companies]);
+        return view('company.companies-list', ['companies' => $companies,'categories'=>$categories]);
     }
 
 
@@ -75,15 +75,18 @@ class CompanyController extends Controller
 
     public function search(Request $request)
     {
-        $key = $request->k;
+        $key = $request->category_id;
 
-        $companies = Company::whereHas('categories', function (Builder $query) use ($key) {
-            return $query->where('category_name', 'LIKE', "%{$key}%");
-        })->orWhere('company_name', 'Like', "%{$key}%")
-            ->orWhere('company_phone', 'Like', "%{$key}%")
-            ->orWhere('company_address',  'Like', "%{$key}%")
-            ->orWhere('company_web',  'Like', "%{$key}%")
-            ->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
-        return view('company.companies-list', ['companies' => $companies]);
+        $companies = Company::whereHas('categories', function ($query) use ($key) {
+            return $query->where('categories.category_id', '=', $key);
+        })->paginate(12)->appends($request->except('page'));
+        $categories = Category::pluck('category_name', 'category_id');
+        if($key){
+            $selected = (int)$key;
+        }
+        else{
+            $selected = 1;
+        }
+        return view('company.companies-list', ['companies' => $companies,'categories'=>$categories,'key'=>$selected]);
     }
 }

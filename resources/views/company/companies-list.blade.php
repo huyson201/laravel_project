@@ -6,11 +6,14 @@
             <div class="col-md-6">
                 <h1 class="display-4">List of all companies</h1>
             </div>
+            
             <div class="col-md-6 d-flex  align-items-center justify-content-center">
+             
                 <form action="{{ route('company.search') }}" method="get" style="margin-bottom: 0; width:80%;">
                     <div class="d-flex">
-                        <input required type="text" name="k" id="" class="form-control" placeholder="Enter your search key..."
-                            value="{{ request()->input('k') }}">
+                  {!! Form::select('category_id', $categories, $key, ['class' => 'form-control', 'id' => 'category']) !!}
+                        {{-- <input  type="text" name="k" id="" class="form-control" placeholder="Enter your search key..."
+                            value="{{ request()->input('k') }}"> --}}
                         <button type="submit" class="btn btn-primary">
                           <i class="fa fa-search" aria-hidden="true"></i></button>
                     </div>
