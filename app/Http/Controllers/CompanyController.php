@@ -75,10 +75,6 @@ class CompanyController extends Controller
 
     public function search(Request $request)
     {
-        $request->validate([
-            'k'     => 'required'
-        ]);
-
         $key = $request->k;
 
         $companies = Company::whereHas('categories', function (Builder $query) use ($key) {
