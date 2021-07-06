@@ -12,6 +12,7 @@ class CompanyController extends Controller
 
     public function index()
     {
+        
         $categories = Category::pluck('category_name', 'category_id');
         $companies = Company::orderBy('company_id', 'DESC')->paginate(12);
         return view('company.companies-list', ['companies' => $companies,'categories'=>$categories]);
@@ -75,18 +76,19 @@ class CompanyController extends Controller
 
     public function search(Request $request)
     {
-        $key = $request->category_id;
+        $category = $request->category_id;
+        $key = $request->k;
 
-        $companies = Company::whereHas('categories', function ($query) use ($key) {
-            return $query->where('categories.category_id', '=', $key);
-        })->paginate(12)->appends($request->except('page'));
+        $companies = Company::whereHas('categories', function ($query) use ($category) {
+            return $query->where('categories.category_id', '=', $category);
+        })->where(function($query) use ($key){
+           return $query->orWhere('company_name', 'Like', "%{$key}%")
+            ->orWhere('company_web', 'Like', "%{$key}%")
+            ->orWhere('company_address',  'Like', "%{$key}%")
+            ->orWhere('company_phone',  'Like', "%{$key}%");
+        })->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
         $categories = Category::pluck('category_name', 'category_id');
-        if($key){
-            $selected = (int)$key;
-        }
-        else{
-            $selected = 1;
-        }
-        return view('company.companies-list', ['companies' => $companies,'categories'=>$categories,'key'=>$selected]);
+     
+        return view('company.companies-list', ['companies' => $companies,'categories'=>$categories]);
     }
 }

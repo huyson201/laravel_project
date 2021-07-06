@@ -11,9 +11,9 @@
              
                 <form action="{{ route('company.search') }}" method="get" style="margin-bottom: 0; width:80%;">
                     <div class="d-flex">
-                  {!! Form::select('category_id', $categories, $key, ['class' => 'form-control', 'id' => 'category']) !!}
-                        {{-- <input  type="text" name="k" id="" class="form-control" placeholder="Enter your search key..."
-                            value="{{ request()->input('k') }}"> --}}
+                  {!! Form::select('category_id', $categories, (int)request()->input('category_id'), ['class' => 'form-control', 'id' => 'category']) !!}
+                        <input  type="text" name="k" id="" class="form-control" placeholder="Enter your search key..."
+                            value="{{ request()->input('k') }}">
                         <button type="submit" class="btn btn-primary">
                           <i class="fa fa-search" aria-hidden="true"></i></button>
                     </div>
