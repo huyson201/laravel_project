@@ -19,7 +19,7 @@
                         </select>
                         <input type="text" name="k" id="" class="form-control" placeholder="Enter your search key..."
                             value="{{ request()->input('k') }}" aria-describedby="helpId">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"
+                        <button type="submit" class="bt" style="margin-left:5px;background:#333;color:#fff;"><i class="fa fa-search"
                                 aria-hidden="true"></i></button>
                     </div>
                 </form>
@@ -48,7 +48,7 @@
                         <option value="ASC" @if (isset($sort_type))  @if ($sort_type==='ASC')
                         selected @endif @endif>ASC</option>
                     </select>
-                    <button type="submit" class="btn btn-primary" style="height: 38px">Sort</button>
+                    <button type="submit" class="btn" style="height: 38px;background:#333;color:#fff;">Sort</button>
                 </div>
             </form>
 
