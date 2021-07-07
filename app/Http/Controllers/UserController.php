@@ -31,19 +31,30 @@ class UserController extends Controller
         $request->validate([
             'user_name'    => 'required',
             'user_email'    => ['required', 'unique:users,user_email,' . $user->user_id . ',user_id', 'regex:/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'],
-            'user_password'    => 'required|min:6',
-            'user_cfpassword' => 'required|min:6'
         ]);
-        $data = $request->only('user_name', 'user_email', 'user_password');
-        if ($data['user_password'] != $user->user_password) {
-            $data['user_password'] = Hash::make($request->user_password);
-            if (Hash::check($request->user_cfpassword, $data['user_password'])) {
+
+        if (empty($request->user_password) && empty($request->user_cfpassword)) {
+            $data = $request->only('user_name', 'user_email');
+            $user->update($data);
+            $message = 'Updated successfully!';
+        } else if (!empty($request->user_password) && !empty($request->user_cfpassword)) {
+            $request->validate([
+                'user_password' => 'min:6',
+                'user_cfpassword' => 'min:6',
+            ]);
+
+            $data = $request->only('user_name', 'user_email', 'user_password');
+            if (!Hash::check($data['user_password'],  $user->user_password)) {
+                $data['user_password'] = Hash::make($request->user_password);
+                if (Hash::check($request->user_cfpassword, $data['user_password'])) {
+                    $user->update($data);
+                    $message = 'Updated successfully!';
+                }
+            } elseif (Hash::check($request->user_cfpassword,  $user->user_password)) {
+                dd("3");
                 $user->update($data);
                 $message = 'Updated successfully!';
             }
-        } else {
-            $user->update($data);
-            $message = 'Updated successfully!';
         }
 
         return redirect()->route('user.edit', [$request->user_id])->with('message', $message);
@@ -52,8 +63,9 @@ class UserController extends Controller
     public function search(Request $request)
     {
         $key = $request->k;
-        $users = User::where('user_name', 'LIKE', "%{$key}%")->orderBy('user_id', 'DESC')->paginate(12)->appends($request->except('page'));
-        return view('user.users-list', ['users' => $users]);
+        $search = $request->search_by;
+        $users = User::where($search, 'LIKE', "%{$key}%")->orderBy('user_id', 'DESC')->paginate(12)->appends($request->except('page'));
+        return view('user.users-list', ['users' => $users, 'search' => $search]);
     }
 
     public function delete($id)

@@ -12,6 +12,13 @@
                     <div class="d-flex">
                         <input type="text" name="k" id="" class="form-control" placeholder="Enter your search key..."
                             value="{{ request()->input('k') }}" aria-describedby="helpId">
+
+                        <select data-filter="make" name="search_by" class="filter-make">
+                            <option value="user_name">Username</option>
+                            <option value="user_email" @if (isset($search))  @if ($search==='user_email') selected @endif @endif>Email</option>
+                        </select>
+
+
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"
                                 aria-hidden="true"></i></button>
                     </div>

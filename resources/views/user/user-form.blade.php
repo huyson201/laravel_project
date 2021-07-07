@@ -26,13 +26,13 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>User Password</label>
-                                            <input type="text" id="password" class="form-control" name="user_password"
-                                                value="{{ $user->user_password }}" required autofocus>
+                                            <input type="password" id="password" class="form-control" name="user_password"
+                                                value="">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Confirm User Password</label>
-                                            <input type="text" id="cfpassword" class="form-control" name="user_cfpassword"
-                                                value="{{ $user->user_password }}" required autofocus>
+                                            <input type="password" id="cfpassword" class="form-control" name="user_cfpassword"
+                                                value="">
                                         </div>
                                         <div class="d-grid mx-auto">
                                             <button type="submit" class="btn btn-dark btn-block">Update</button>
@@ -71,12 +71,12 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>User Password</label>
-                                            <input type="text" id="password" placeholder="User Password ..." class="form-control" name="user_password"
+                                            <input type="password" id="password" placeholder="User Password ..." class="form-control" name="user_password"
                                                 required autofocus>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Confirm User Password</label>
-                                            <input type="text" id="cfpassword" placeholder="Confirm Password ..." class="form-control" name="user_cfpassword"
+                                            <input type="password" id="cfpassword" placeholder="Confirm Password ..." class="form-control" name="user_cfpassword"
                                                 required autofocus>
                                         </div>
                                         <div class="d-grid mx-auto">
