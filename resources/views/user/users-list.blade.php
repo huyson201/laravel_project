@@ -18,7 +18,6 @@
                             <option value="user_email" @if (isset($search))  @if ($search==='user_email') selected @endif @endif>Email</option>
                         </select>
 
-
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"
                                 aria-hidden="true"></i></button>
                     </div>
