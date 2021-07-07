@@ -80,7 +80,8 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $users->links() }}
         </div>
-        {{ $users->links() }}
+
     </div><!-- Main Col END -->
 @endsection
