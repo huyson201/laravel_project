@@ -31,7 +31,7 @@ class CompanyController extends Controller
             'company_name' =>  'required',
             'company_web' => ['required', 'regex:/^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/'],
             'company_address' =>  'required',
-            'company_phone' =>  ['required', 'regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/'],
+            'company_phone' =>  ['required', 'regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/'],
             'company_code' =>  'required|regex:/^[0-9]+$/',
         ]);
         $company = new Company($request->all());
@@ -58,7 +58,7 @@ class CompanyController extends Controller
     {
         $request->validate([
             'company_web' => ['regex:/^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/'],
-            'company_phone' =>  ['regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/'],
+            'company_phone' =>  ['regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/'],
             'company_code' =>  'regex:/^[0-9]+$/',
         ]);
         $data = $request->all();
