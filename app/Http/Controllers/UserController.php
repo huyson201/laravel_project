@@ -12,10 +12,15 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
         $users = User::orderBy('user_id', 'DESC')->paginate(12);
-        return view('user.users-list', ['users' => $users]);
+        $sort = $request->sort;
+        $sort_type = $request->sort_type;
+        if (!empty($sort)&&!empty($sort)) {
+            $users = User::orderBy($sort, $sort_type)->paginate(12);
+        }
+        return view('user.users-list', ['users' => $users, 'sort' => $sort, 'sort_type' => $sort_type]);
     }
 
     public function edit_view($id)
@@ -51,7 +56,6 @@ class UserController extends Controller
                     $message = 'Updated successfully!';
                 }
             } elseif (Hash::check($request->user_cfpassword,  $user->user_password)) {
-                dd("3");
                 $user->update($data);
                 $message = 'Updated successfully!';
             }
