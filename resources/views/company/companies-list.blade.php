@@ -9,9 +9,13 @@
             
             <div class="col-md-6 d-flex  align-items-center justify-content-center">
              
-                <form action="{{ route('company.search') }}" method="get" style="margin-bottom: 0; width:80%;">
+                <form action="{{ route('company.search') }}" method="get" style="margin-bottom: 0;">
+                    {{-- <div class="d-flex">
+                    {!! Form::select('category_id', $categories, (int)request()->input('category_id'), ['class' => 'form-control', 'id' => 'category']) !!}
+                    {!! Form::select('category_id', $categories, (int)request()->input('category_id'), ['class' => 'form-control', 'id' => 'category']) !!}
+                </div> --}}
                     <div class="d-flex">
-                  {!! Form::select('category_id', $categories, (int)request()->input('category_id'), ['class' => 'form-control', 'id' => 'category']) !!}
+                        {!! Form::select('category_id', $categories->prepend('All Categories') , (int)request()->input('category_id'), ['class' => 'form-control', 'id' => 'category']) !!}
                         <input  type="text" name="k" id="" class="form-control" placeholder="Enter your search key..."
                             value="{{ request()->input('k') }}">
                         <button type="submit" class="btn btn-primary">

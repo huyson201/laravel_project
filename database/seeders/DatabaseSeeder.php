@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CompanyCategory;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
             TrainerSeeder::class,
             CompanySeeder::class,
             CategorySeeder::class,
+            CompanyCategorySeeder::class,
         ]);
     }
 }

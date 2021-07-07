@@ -78,17 +78,27 @@ class CompanyController extends Controller
     {
         $category = $request->category_id;
         $key = $request->k;
-
-        $companies = Company::whereHas('categories', function ($query) use ($category) {
-            return $query->where('categories.category_id', '=', $category);
-        })->where(function($query) use ($key){
-           return $query->orWhere('company_name', 'Like', "%{$key}%")
+       
+        $categories = Category::pluck('category_name', 'category_id');
+        if($category == 0 && $key == null){
+            $companies = Company::whereHas('categories')->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
+        }
+        else if($category == 0 && $key != null){
+            $companies = Company::orWhere('company_name', 'Like', "%{$key}%")
             ->orWhere('company_web', 'Like', "%{$key}%")
             ->orWhere('company_address',  'Like', "%{$key}%")
-            ->orWhere('company_phone',  'Like', "%{$key}%");
-        })->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
-        $categories = Category::pluck('category_name', 'category_id');
-     
+            ->orWhere('company_phone',  'Like', "%{$key}%")
+            ->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
+        }else{
+            $companies = Company::whereHas('categories', function ($query) use ($category) {
+                return $query->where('categories.category_id', '=', $category);
+            })->where(function($query) use ($key){
+               return $query->orWhere('company_name', 'Like', "%{$key}%")
+                ->orWhere('company_web', 'Like', "%{$key}%")
+                ->orWhere('company_address',  'Like', "%{$key}%")
+                ->orWhere('company_phone',  'Like', "%{$key}%");
+            })->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
+        }
         return view('company.companies-list', ['companies' => $companies,'categories'=>$categories]);
     }
 }
