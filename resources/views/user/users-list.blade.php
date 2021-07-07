@@ -32,6 +32,8 @@
         <div class="container" style="width:85%;">
             <form action="{{ route('user.list') }}" method="get" style="margin-bottom: 0; width:80%;">
                 <div class="d-flex">
+                   <input type="hidden" name="keyword" value=@if (isset($key)) {{$key}} @endif>
+                   <input type="hidden" name="keyword_by" value=@if (isset($search)) {{$search}} @endif>
                     <select data-filter="make" name="sort" class="filter-make filter form-control"
                         style="width:20%;margin-bottom:5px;margin-right:5px;">
                         <option value="user_id">ID</option>

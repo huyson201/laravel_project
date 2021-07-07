@@ -14,13 +14,21 @@ class UserController extends Controller
     //
     public function index(Request $request)
     {
-        $users = User::orderBy('user_id', 'DESC')->paginate(12);
+        $users = User::orderBy('user_id', 'DESC')->paginate(5);
         $sort = $request->sort;
         $sort_type = $request->sort_type;
-        if (!empty($sort)&&!empty($sort)) {
-            $users = User::orderBy($sort, $sort_type)->paginate(12);
+        $search = $request->keyword_by;
+        $key = $request->keyword;
+
+        if (!empty($sort) && !empty($sort)) {
+            
+            if (!empty($search) && !empty($key)) {
+                $users = User::where($search, 'LIKE', "%{$key}%")->orderBy($sort, $sort_type)->paginate(5)->appends($request->except('page'));
+            } else {
+                $users = User::orderBy($sort, $sort_type)->paginate(5);
+            }
         }
-        return view('user.users-list', ['users' => $users, 'sort' => $sort, 'sort_type' => $sort_type]);
+        return view('user.users-list', ['users' => $users, 'sort' => $sort, 'sort_type' => $sort_type, 'search' => $search, 'key' => $key]);
     }
 
     public function edit_view($id)
@@ -68,8 +76,8 @@ class UserController extends Controller
     {
         $key = $request->k;
         $search = $request->search_by;
-        $users = User::where($search, 'LIKE', "%{$key}%")->orderBy('user_id', 'DESC')->paginate(12)->appends($request->except('page'));
-        return view('user.users-list', ['users' => $users, 'search' => $search]);
+        $users = User::where($search, 'LIKE', "%{$key}%")->orderBy('user_id', 'DESC')->paginate(5)->appends($request->except('page'));
+        return view('user.users-list', ['users' => $users, 'search' => $search, 'key' => $key]);
     }
 
     public function delete($id)
