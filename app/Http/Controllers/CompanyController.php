@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Company;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
 
 class CompanyController extends Controller
 {
@@ -13,8 +12,10 @@ class CompanyController extends Controller
 
     public function index()
     {
+        
+        $categories = Category::pluck('category_name', 'category_id');
         $companies = Company::orderBy('company_id', 'DESC')->paginate(12);
-        return view('company.companies-list', ['companies' => $companies]);
+        return view('company.companies-list', ['companies' => $companies,'categories'=>$categories]);
     }
 
 
@@ -30,7 +31,7 @@ class CompanyController extends Controller
             'company_name' =>  'required',
             'company_web' => ['required', 'regex:/^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/'],
             'company_address' =>  'required',
-            'company_phone' =>  ['required', 'regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/'],
+            'company_phone' =>  ['required', 'regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/'],
             'company_code' =>  'required|regex:/^[0-9]+$/',
         ]);
         $company = new Company($request->all());
@@ -57,7 +58,7 @@ class CompanyController extends Controller
     {
         $request->validate([
             'company_web' => ['regex:/^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/'],
-            'company_phone' =>  ['regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/'],
+            'company_phone' =>  ['regex:/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/'],
             'company_code' =>  'regex:/^[0-9]+$/',
         ]);
         $data = $request->all();
@@ -75,15 +76,29 @@ class CompanyController extends Controller
 
     public function search(Request $request)
     {
+        $category = $request->category_id;
         $key = $request->k;
-
-        $companies = Company::whereHas('categories', function (Builder $query) use ($key) {
-            return $query->where('category_name', 'LIKE', "%{$key}%");
-        })->orWhere('company_name', 'Like', "%{$key}%")
-            ->orWhere('company_phone', 'Like', "%{$key}%")
+       
+        $categories = Category::pluck('category_name', 'category_id');
+        if($category == 0 && $key == null){
+            $companies = Company::whereHas('categories')->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
+        }
+        else if($category == 0 && $key != null){
+            $companies = Company::orWhere('company_name', 'Like', "%{$key}%")
+            ->orWhere('company_web', 'Like', "%{$key}%")
             ->orWhere('company_address',  'Like', "%{$key}%")
-            ->orWhere('company_web',  'Like', "%{$key}%")
+            ->orWhere('company_phone',  'Like', "%{$key}%")
             ->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
-        return view('company.companies-list', ['companies' => $companies]);
+        }else{
+            $companies = Company::whereHas('categories', function ($query) use ($category) {
+                return $query->where('categories.category_id', '=', $category);
+            })->where(function($query) use ($key){
+               return $query->orWhere('company_name', 'Like', "%{$key}%")
+                ->orWhere('company_web', 'Like', "%{$key}%")
+                ->orWhere('company_address',  'Like', "%{$key}%")
+                ->orWhere('company_phone',  'Like', "%{$key}%");
+            })->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
+        }
+        return view('company.companies-list', ['companies' => $companies,'categories'=>$categories]);
     }
 }
