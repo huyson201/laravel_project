@@ -84,3 +84,4 @@ class TrainerController extends Controller
         return redirect()->route('trainer.list')->with('delete-message', 'delete trainer successfully!');
     }
 }
+

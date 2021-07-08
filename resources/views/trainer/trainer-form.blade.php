@@ -68,7 +68,7 @@
                                </div>
                                <div class="form-group mb-3">
                                 <label for="phone">Phone</label>
-                                <input type="text" placeholder="Trainer's phoe..." id="phone" class="form-control" name="trainer_phone"  required>
+                                <input type="text" placeholder="Trainer's phone..." id="phone" class="form-control" name="trainer_phone"  required>
                                 @error('trainer_phone')
                                 <p class="text-danger">{{$message}}</p>
                                  @enderror
