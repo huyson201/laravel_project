@@ -28,75 +28,14 @@
                     <span class="menu-collapsed">Tables</span>
                 </a>
             </div>
-            <a href="#submenu2" data-toggle="collapse" aria-expanded="false"
-                class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-user fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Users</span>
-                    <span class="submenu-icon ml-auto"></span>
-                </div>
-            </a>
-            <!-- Submenu content -->
-            <div id='submenu2' class="collapse sidebar-submenu">
-                <a href="{{route('user.list')}}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">List of all users</span>
-                </a>
-                <a href="{{ route('user.create') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Add new</span>
-                </a>
-            </div>
 
-            <a href="#submenu3" data-toggle="collapse" aria-expanded="false"
-                class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-users fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Trainers</span>
-                    <span class="submenu-icon ml-auto"></span>
-                </div>
-            </a>
-            <!-- Submenu content -->
-            <div id='submenu3' class="collapse sidebar-submenu">
-                <a href="{{ route('trainer.list') }}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">List of all trainers</span>
-                </a>
-                <a href="{{ route('trainer.create') }}"
-                    class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Add new</span>
-                </a>
-            </div>
-            <a href="#submenu4" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                   <span class="fa fa-building fa-fw mr-3"></span> 
-                    <span class="menu-collapsed">Companies</span>
-                    <span class="submenu-icon ml-auto"></span>
-                </div>
-            </a>
-            <!-- Submenu content -->
-            <div id='submenu4' class="collapse sidebar-submenu">
-                <a href="{{route('company.list')}}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">List of all companies</span>
-                </a>
-                <a href="{{route('company.create')}}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Add new</span>
-                </a>
-            </div>
-            <!--Here  -->
-            <a href="#submenu5" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                   <span class="fa fa-shield fa-fw mr-3"></span> 
-                    <span class="menu-collapsed">Categories</span>
-                    <span class="submenu-icon ml-auto"></span>
-                </div>
-            </a>
-            <!-- Submenu content -->
-            <div id='submenu5' class="collapse sidebar-submenu">
-                <a href="{{route('categories.list')}}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">List categories</span>
-                </a>
-                <a href="{{route('categories.create')}}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">Add new</span>
-                </a>
-            </div>
+            @include('user.user-menu')
+
+            @include('trainer.trainer-menu')
+
+            @include('company.company-menu')
+
+            @include('category.category-menu')
             <!--  -->
             <!-- Separator without title -->
             <li class="list-group-item sidebar-separator menu-collapsed"></li>

@@ -2,21 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TrainerExport;
 use App\Models\Company;
 use App\Models\Trainer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Excel;
 
 class TrainerController extends Controller
 {
     //
 
+    /**
+     * index
+     *
+     * @return void
+     */
     public function index()
     {
         $trainers = Trainer::orderBy('trainer_id', 'DESC')->paginate(12);
         return view('trainer.trainer-list', ['trainers' => $trainers]);
     }
 
+    /**
+     * search
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function search(Request $request)
     {
         $request->validate([
@@ -34,6 +47,12 @@ class TrainerController extends Controller
         return view('trainer.trainer-list', ['trainers' => $trainers]);
     }
 
+    /**
+     * edit_view
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function edit_view($id)
     {
         $trainer = Trainer::find($id);
@@ -44,6 +63,12 @@ class TrainerController extends Controller
         return view('trainer.trainer-form', ['trainer' => $trainer, 'companies' => $companies]);
     }
 
+    /**
+     * edit
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function edit(Request $request)
     {
         $request->validate([
@@ -58,12 +83,23 @@ class TrainerController extends Controller
         return redirect()->route('trainer.edit', [$request->trainer_id])->with('success', 'Updated successfully!');
     }
 
+    /**
+     * create_view
+     *
+     * @return void
+     */
     public function create_view()
     {
         $companies = Company::pluck('company_name', 'company_id');
         return view('trainer.trainer-form',  ['companies' => $companies]);
     }
 
+    /**
+     * create
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function create(Request $request)
     {
 
@@ -81,9 +117,42 @@ class TrainerController extends Controller
         return redirect()->route('trainer.list')->with('add-message', "create trainer successfully!");
     }
 
+    /**
+     * delete
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function delete($id)
     {
         Trainer::find($id)->delete();
         return redirect()->route('trainer.list')->with('delete-message', 'delete trainer successfully!');
+    }
+
+    /**
+     * export_view
+     *
+     * @return void
+     */
+    public function export_view()
+    {
+        return view('trainer.trainer-export');
+    }
+
+    public function export(Request $request)
+    {
+        $request->validate([
+            'file_name' => 'required|max:255',
+            'export_format' => 'required'
+        ]);
+        switch ($request->export_format) {
+            case 'xlsx':
+                return Excel::download(new TrainerExport, $request->file_name . ".xlsx");
+            case 'csv':
+                return Excel::download(new TrainerExport, $request->file_name . ".csv");
+            default:
+                # code...
+                return redirect()->back()->with("export-message", "export fail!");
+        }
     }
 }

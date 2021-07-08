@@ -38,6 +38,8 @@ Route::middleware('check.login')->group(function () {
 
     Route::name('trainer.')->group(function () {
         Route::get('/trainers', [TrainerController::class, 'index'])->name('list');
+        Route::get('/trainers/export', [TrainerController::class, 'export_view'])->name('export-view');
+        Route::get('/trainers/export-execute', [TrainerController::class, 'export'])->name('export');
         Route::get('/trainers/search', [TrainerController::class, 'search'])->name('search');
         Route::prefix('trainer')->group(function () {
             Route::get('/edit/{id}', [TrainerController::class, 'edit_view'])->name('edit')->where('id', '[0-9]+');
