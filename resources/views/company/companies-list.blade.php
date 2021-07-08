@@ -86,9 +86,9 @@
                         @endforeach
                     </td>
                     <td>
-                        <a href="{{ route('company.edit', [$company->company_id]) }}" class="btn btn-success">Edit</a>
+                        <a style="margin-bottom: 5px" href="{{ route('company.edit', [$company->company_id]) }}" class="btn btn-success">&nbsp;&nbsp;Edit&nbsp;&nbsp;</a>
                         <a href="{{ route('company.delete', [$company->company_id]) }}" class="btn btn-danger"
-                            onclick="confirm('Are you sure want to delete [{{ $company->company_name }}] ?')">Delete</a>
+                            onclick="return confirm('Are you sure want to delete [{{ $company->company_name }}] ?')">Delete</a>
                     </td>
                 </tr>
                  @endforeach
