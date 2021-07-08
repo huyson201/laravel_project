@@ -40,7 +40,13 @@
                         <td>{{ $trainer->trainer_name }}</td>
                         <td>{{ $trainer->trainer_phone }}</td>
                         <td>{{ $trainer->trainer_address }}</td>
-                        <td>{{ $trainer->company->company_name }}</td>
+                        <td>
+                            @if ($trainer->company)
+                                {{ $trainer->company->company_name }}
+                            @else
+                                Not Found
+                            @endif
+                        </td>
                         <td class="text-nowrap">
                             <a href="{{ route('trainer.edit', [$trainer->trainer_id]) }}" class="btn btn-success">Edit</a>
                             <a href="{{ route('trainer.delete', [$trainer->trainer_id]) }}" class="btn btn-danger"
