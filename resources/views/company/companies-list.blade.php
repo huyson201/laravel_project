@@ -64,7 +64,7 @@
                     </th>
                     <th scope="col">Company Web</th>
                     <th scope="col">Company Address</th>
-                    <th scope="col">Company Phone</th>
+                    <th scope="col" style="width: 15%;">Company Phone</th>
                     <th scope="col">Company Code</th>
                     <th scope="col">Categories</th>
                     <th scope="col">Action</th>
@@ -82,7 +82,7 @@
                     <td>{{ $company->company_code }}</td>
                     <td>
                         @foreach ($company->categories as $category)
-                            <li>{{ $category->category_name }}</li>
+                            <span>- {{ $category->category_name }}</span>
                         @endforeach
                     </td>
                     <td>
