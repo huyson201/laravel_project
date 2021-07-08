@@ -35,7 +35,7 @@ class CompanyController extends Controller
                 $companies = $companies->orderBy('company_id', 'DESC')->paginate(12);
             }
         }
-        return view('company.companies-list', ['companies' => $companies, 'categories' => $categories]);
+        return view('company.company-list', ['companies' => $companies, 'categories' => $categories]);
     }
 
 

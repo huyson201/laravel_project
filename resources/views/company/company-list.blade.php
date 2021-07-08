@@ -71,7 +71,6 @@
                 </tr>
             </thead>
             <tbody>
-             
                 @foreach ($companies as $company)
                 <tr>
                     <th scope="row" style="text-align: center">{{ $company->company_id }}</th>
