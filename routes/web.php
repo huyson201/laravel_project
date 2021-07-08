@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -48,7 +49,6 @@ Route::middleware('check.login')->group(function () {
     });
     Route::name('company.')->group(function () {
         Route::get('/companies', [CompanyController::class, 'index'])->name('list');
-        Route::get('/companies/search', [CompanyController::class, 'search'])->name('search');
         Route::prefix('companies')->group(function () {
             Route::get('/new', [CompanyController::class, 'create_view'])->name('create');
             Route::get('/create', [CompanyController::class, 'create'])->name('custom.create');
@@ -60,13 +60,25 @@ Route::middleware('check.login')->group(function () {
 
     Route::name('user.')->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('list');
-         Route::get('/users/search', [UserController::class, 'search'])->name('search');
+        Route::get('/users/search', [UserController::class, 'search'])->name('search');
         Route::prefix('users')->group(function () {
             Route::get('/new', [UserController::class, 'create_view'])->name('create');
             Route::get('/create', [UserController::class, 'create'])->name('custom.create');
             Route::get('/edit/{id}', [UserController::class, 'edit_view'])->name('edit');;
             Route::post('/custom-edit', [UserController::class, 'edit'])->name('custom.edit');
             Route::get('delete/{id}', [UserController::class, 'delete'])->name('delete');
+        });
+    });
+    Route::name('categories.')->group(function () {
+        Route::get('/categories', [CategoryController::class, 'index'])->name('list');
+        Route::get('/categories/search', [CategoryController::class, 'search'])->name('search');
+        Route::prefix('categories')->group(function () {
+            Route::get('/new', [CategoryController::class, 'create_view'])->name('create');
+            Route::get('/create', [CategoryController::class, 'create'])->name('custom.create');
+            Route::get('/edit/{id}', [CategoryController::class, 'edit_view'])->name('edit');;
+            Route::post('/custom-edit', [CategoryController::class, 'edit'])->name('custom.edit');
+            Route::get('delete/{id}', [CategoryController::class, 'delete'])->name('delete');
+            Route::get('deleteconfirm/{id}', [CategoryController::class, 'deleteconfirm'])->name('deleteconfirm');
         });
     });
 });

@@ -71,3 +71,10 @@
 .table-bordered thead th,.table-bordered td,.table-bordered th {
     vertical-align: middle !important;
 }
+/* sort icon */
+.sort,.sort:hover{
+    color:black;
+}
+.d-flex{
+    align-items: center;
+}

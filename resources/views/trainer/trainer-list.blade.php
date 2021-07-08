@@ -25,7 +25,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Trainer Name</th>
                     <th scope="col">Trainer Phone</th>
                     <th scope="col">Trainer Address</th>
@@ -40,7 +40,11 @@
                         <td>{{ $trainer->trainer_name }}</td>
                         <td>{{ $trainer->trainer_phone }}</td>
                         <td>{{ $trainer->trainer_address }}</td>
-                        <td>{{ $trainer->company->company_name }}</td>
+                        @if (isset($trainer->company))
+                        <td>{{ ($trainer->company->company_name) }}</td>
+                        @else
+                        <td></td>
+                        @endif
                         <td class="text-nowrap">
                             <a href="{{ route('trainer.edit', [$trainer->trainer_id]) }}" class="btn btn-success">Edit</a>
                             <a href="{{ route('trainer.delete', [$trainer->trainer_id]) }}" class="btn btn-danger"

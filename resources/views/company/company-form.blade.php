@@ -75,7 +75,6 @@
         <!-- MAIN -->
         <div class="col p-4">
             <h1 class="display-4">Add Company</h1>
-            {{-- <p class="text-success"> {{ session('success') }}</p> --}}
             <main class="signup-form mt-5">
                 <div class="cotainer">
                     <div class="row justify-content-center">
