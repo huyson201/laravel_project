@@ -16,9 +16,16 @@ class Company extends Model
         'company_phone',
         'company_code',
     ];
+
     public function categories()
     {
-        return $this->belongsToMany(Category::class,'company_category','company_id','category_id','company_id','category_id');
+        return $this->belongsToMany(
+            Category::class,        // model liên quan 
+            'company_category',     // bảng trung gian
+            'company_id',           // company_id trong bảng trung gian
+            'category_id',          // category_id trong bảng trung gian
+            'company_id',           // company_id từ bảng companies
+            'category_id'           // category_id từ bảng categories
+        );
     }
-
 }
