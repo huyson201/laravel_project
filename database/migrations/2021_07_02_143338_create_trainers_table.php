@@ -21,7 +21,6 @@ class CreateTrainersTable extends Migration
             $table->integer("company_id");
             $table->string('status')->nullable();
             $table->timestamps();
-            $table->foreign('company_id')->references('company_id')->on('companies')->onDelete('cascade');
         });
     }
 

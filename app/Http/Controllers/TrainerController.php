@@ -47,7 +47,10 @@ class TrainerController extends Controller
     public function edit(Request $request)
     {
         $request->validate([
-            'trainer_phone'    => 'required'
+            'trainer_name'      =>  'required',
+            'trainer_phone'     =>  'required',
+            'trainer_address'   =>  'required',
+            'company_id'        =>  'required|regex:/^[0-9]+$/'
         ]);
 
         $data = $request->only('trainer_name', 'trainer_phone', 'trainer_address', 'company_id');
@@ -84,4 +87,3 @@ class TrainerController extends Controller
         return redirect()->route('trainer.list')->with('delete-message', 'delete trainer successfully!');
     }
 }
-
