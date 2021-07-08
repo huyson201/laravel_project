@@ -10,10 +10,25 @@ class CompanyController extends Controller
 {
     //
 
-    public function index()
+    public function index(Request $request)
     {
+        $sort_name = $request->sort;
+        $sort_type = $request->sort_type;
         $categories = Category::pluck('category_name', 'category_id');
-        $companies = Company::orderBy('company_id', 'DESC')->paginate(12);
+        $category = $request->category_id;
+        $key = $request->k;
+        if ($sort_name && $sort_type) {
+            if ($sort_name != 'company_id' && $sort_name != 'company_name' ||
+                 $sort_type != 'asc' && $sort_type != 'desc') {
+                return abort(404, 'Not found');
+            } else {
+                $companies = $this->search($category, $key);
+                $companies = $companies->orderBy($sort_name, $sort_type)->paginate(12);
+            }
+        } else {
+            $companies = $this->search($category, $key);
+            $companies = $companies->orderBy('company_id', 'DESC')->paginate(12);
+        }
         return view('company.companies-list', ['companies' => $companies, 'categories' => $categories]);
     }
 
@@ -40,6 +55,9 @@ class CompanyController extends Controller
     public function edit_view($id)
     {
         $company = Company::find($id);
+        if(!$company){
+            return abort(403, 'Company Not found');
+           }
         if (count($company->categories()->get()) > 0) {
             for ($i = 1; $i <= count($company->categories()->get()); $i++) {
                 $selected[$i] = $i;
@@ -71,20 +89,15 @@ class CompanyController extends Controller
         return redirect()->route('company.list')->with('message', 'Deleted successfully!');
     }
 
-    public function search(Request $request)
+    public function search($category, $key)
     {
-        $category = $request->category_id;
-        $key = $request->k;
-
-        $categories = Category::pluck('category_name', 'category_id');
         if ($category == 0 && $key == null) {
-            $companies = Company::whereHas('categories')->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
+            $companies = Company::whereHas('categories');
         } else if ($category == 0 && $key != null) {
             $companies = Company::orWhere('company_name', 'Like', "%{$key}%")
                 ->orWhere('company_web', 'Like', "%{$key}%")
                 ->orWhere('company_address',  'Like', "%{$key}%")
-                ->orWhere('company_phone',  'Like', "%{$key}%")
-                ->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
+                ->orWhere('company_phone',  'Like', "%{$key}%");
         } else {
             $companies = Company::whereHas('categories', function ($query) use ($category) {
                 return $query->where('categories.category_id', '=', $category);
@@ -93,8 +106,8 @@ class CompanyController extends Controller
                     ->orWhere('company_web', 'Like', "%{$key}%")
                     ->orWhere('company_address',  'Like', "%{$key}%")
                     ->orWhere('company_phone',  'Like', "%{$key}%");
-            })->orderBy('company_id', 'DESC')->paginate(12)->appends($request->except('page'));
+            });
         }
-        return view('company.companies-list', ['companies' => $companies, 'categories' => $categories]);
+        return $companies;
     }
 }

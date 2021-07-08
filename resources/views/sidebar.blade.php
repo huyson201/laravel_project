@@ -74,7 +74,7 @@
             <!-- Submenu content -->
             <div id='submenu4' class="collapse sidebar-submenu">
                 <a href="{{route('company.list')}}" class="list-group-item list-group-item-action bg-dark text-white">
-                    <span class="menu-collapsed">List</span>
+                    <span class="menu-collapsed">List of all companies</span>
                 </a>
                 <a href="{{route('company.create')}}" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Add new</span>

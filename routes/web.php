@@ -48,7 +48,6 @@ Route::middleware('check.login')->group(function () {
     });
     Route::name('company.')->group(function () {
         Route::get('/companies', [CompanyController::class, 'index'])->name('list');
-        Route::get('/companies/search', [CompanyController::class, 'search'])->name('search');
         Route::prefix('companies')->group(function () {
             Route::get('/new', [CompanyController::class, 'create_view'])->name('create');
             Route::get('/create', [CompanyController::class, 'create'])->name('custom.create');
@@ -60,7 +59,7 @@ Route::middleware('check.login')->group(function () {
 
     Route::name('user.')->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('list');
-         Route::get('/users/search', [UserController::class, 'search'])->name('search');
+        Route::get('/users/search', [UserController::class, 'search'])->name('search');
         Route::prefix('users')->group(function () {
             Route::get('/new', [UserController::class, 'create_view'])->name('create');
             Route::get('/create', [UserController::class, 'create'])->name('custom.create');
