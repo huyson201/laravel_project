@@ -5,6 +5,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,11 +53,12 @@ Route::middleware('check.login')->group(function () {
         Route::prefix('companies')->group(function () {
             Route::get('/new', [CompanyController::class, 'create_view'])->name('create');
             Route::get('/create', [CompanyController::class, 'create'])->name('custom.create');
-            Route::get('/edit/{id}', [CompanyController::class, 'edit_view'])->name('edit');;
+            Route::get('/edit/{id}', [CompanyController::class, 'edit_view'])->name('edit');
             Route::post('/custom-edit', [CompanyController::class, 'edit'])->name('custom.edit');
             Route::get('delete/{id}', [CompanyController::class, 'delete'])->name('delete');
         });
     });
+<<<<<<< HEAD
     Route::name('categories.')->group(function () {
         Route::get('/categories', [CategoryController::class, 'index'])->name('list');
         Route::get('/categories/search', [CategoryController::class, 'search'])->name('search');
@@ -67,6 +69,18 @@ Route::middleware('check.login')->group(function () {
             Route::post('/custom-edit', [CategoryController::class, 'edit'])->name('custom.edit');
             Route::get('delete/{id}', [CategoryController::class, 'delete'])->name('delete');
             Route::get('deleteconfirm/{id}', [CategoryController::class, 'deleteconfirm'])->name('deleteconfirm');
+=======
+
+    Route::name('user.')->group(function () {
+        Route::get('/users', [UserController::class, 'index'])->name('list');
+         Route::get('/users/search', [UserController::class, 'search'])->name('search');
+        Route::prefix('users')->group(function () {
+            Route::get('/new', [UserController::class, 'create_view'])->name('create');
+            Route::get('/create', [UserController::class, 'create'])->name('custom.create');
+            Route::get('/edit/{id}', [UserController::class, 'edit_view'])->name('edit');;
+            Route::post('/custom-edit', [UserController::class, 'edit'])->name('custom.edit');
+            Route::get('delete/{id}', [UserController::class, 'delete'])->name('delete');
+>>>>>>> users
         });
     });
 });

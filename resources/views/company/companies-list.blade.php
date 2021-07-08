@@ -10,10 +10,6 @@
             <div class="col-md-6 d-flex  align-items-center justify-content-center">
              
                 <form action="{{ route('company.search') }}" method="get" style="margin-bottom: 0;">
-                    {{-- <div class="d-flex">
-                    {!! Form::select('category_id', $categories, (int)request()->input('category_id'), ['class' => 'form-control', 'id' => 'category']) !!}
-                    {!! Form::select('category_id', $categories, (int)request()->input('category_id'), ['class' => 'form-control', 'id' => 'category']) !!}
-                </div> --}}
                     <div class="d-flex">
                         {!! Form::select('category_id', $categories->prepend('All Categories') , (int)request()->input('category_id'), ['class' => 'form-control', 'id' => 'category']) !!}
                         <input  type="text" name="k" id="" class="form-control" placeholder="Enter your search key..."
@@ -30,8 +26,8 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Company Name</th>
+                    <th scope="col">ID <a href=""><i class="fa fa-sort-up"></i></a></th>
+                    <th scope="col">Company Name <a href=""><i class="fa fa-sort-up"></a></th>
                     <th scope="col">Company Web</th>
                     <th scope="col">Company Address</th>
                     <th scope="col">Company Phone</th>
