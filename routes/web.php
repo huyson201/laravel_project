@@ -58,7 +58,6 @@ Route::middleware('check.login')->group(function () {
             Route::get('delete/{id}', [CompanyController::class, 'delete'])->name('delete');
         });
     });
-<<<<<<< HEAD
     Route::name('categories.')->group(function () {
         Route::get('/categories', [CategoryController::class, 'index'])->name('list');
         Route::get('/categories/search', [CategoryController::class, 'search'])->name('search');
@@ -69,7 +68,6 @@ Route::middleware('check.login')->group(function () {
             Route::post('/custom-edit', [CategoryController::class, 'edit'])->name('custom.edit');
             Route::get('delete/{id}', [CategoryController::class, 'delete'])->name('delete');
             Route::get('deleteconfirm/{id}', [CategoryController::class, 'deleteconfirm'])->name('deleteconfirm');
-=======
 
     Route::name('user.')->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('list');
@@ -80,7 +78,6 @@ Route::middleware('check.login')->group(function () {
             Route::get('/edit/{id}', [UserController::class, 'edit_view'])->name('edit');;
             Route::post('/custom-edit', [UserController::class, 'edit'])->name('custom.edit');
             Route::get('delete/{id}', [UserController::class, 'delete'])->name('delete');
->>>>>>> users
         });
     });
 });
