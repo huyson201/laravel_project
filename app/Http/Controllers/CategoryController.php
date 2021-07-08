@@ -34,14 +34,7 @@ class CategoryController extends Controller
     public function edit_view($id)
     {
         $category = Category::find($id);
-        if (count($category->get()) > 0) {
-            for ($i = 1; $i <= count($category->get()); $i++) {
-                $selected[$i] = $i;
-            };
-        } else {
-            $selected = '';
-        };
-        return view('category.categories-form', ['category' => $category, 'selected' => $selected]);
+        return view('category.categories-form', ['category' => $category]);
     }
 
     public function edit(Request $request)
@@ -56,19 +49,31 @@ class CategoryController extends Controller
     }
     public function deleteconfirm($id)
     {
-        $category = Category::find($id);
-        if (count($category->get()) > 0) {
-            for ($i = 1; $i <= count($category->get()); $i++) {
-                $selected[$i] = $i;
-            };
-        } else {
-            $selected = '';
-        };
-        return view('category.categories-delete', ['category' => $category, 'selected' => $selected]);
+        // if ($id == -1) {
+        //     $category = Category::orderBy('category_id', 'ASC');
+        // } else {
+            $category = Category::find($id);
+        // }
+        // if (count($category->get()) > 0) {
+        //     for ($i = 1; $i <= count($category->get()); $i++) {
+        //         $selected[$i] = $i;
+        //     };
+        // } else {
+        //     $selected = '';
+        // };
+        return view('category.categories-delete', [ 'category' => $category  ]);
     }
     public function delete($id)
     {
+        // dd($id);
+        // if(is_array( $id ))
+        // {
+        //     Category::all()->delete();
+        //     return redirect()->route('categories.list')->with('message', 'Deleted successfully!');
+
+        // }else{
         Category::find($id)->delete();
+        // }
         return redirect()->route('categories.list')->with('message', 'Deleted successfully!');
     }
 

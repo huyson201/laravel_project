@@ -47,6 +47,7 @@
 
         </tbody>
     </table>
-    {{ $cate->links() }}
+    {{ $cate->links() }}    
+     <!-- <a href="{{ route('categories.deleteconfirm', [-1]) }}" class="btn btn-danger">Delete All Categories</a> -->
 </div><!-- Main Col END -->
 @endsection
