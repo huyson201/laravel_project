@@ -17,17 +17,23 @@ class CompanyController extends Controller
         $categories = Category::pluck('category_name', 'category_id');
         $category = $request->category_id;
         $key = $request->k;
-        if ($sort_name && $sort_type) {
-            if ($sort_name != 'company_id' && $sort_name != 'company_name' ||
-                 $sort_type != 'asc' && $sort_type != 'desc') {
-                return abort(404, 'Not found');
+        if ($request->all() == null) {
+            $companies = Company::orderBy('company_id', 'DESC')->paginate(12);
+        } else {
+            if ($sort_name && $sort_type) {
+                if (
+                    $sort_name != 'company_id' && $sort_name != 'company_name' ||
+                    $sort_type != 'asc' && $sort_type != 'desc'
+                ) {
+                    return abort(404, 'Not found');
+                } else {
+                    $companies = $this->search($category, $key);
+                    $companies = $companies->orderBy($sort_name, $sort_type)->paginate(12);
+                }
             } else {
                 $companies = $this->search($category, $key);
-                $companies = $companies->orderBy($sort_name, $sort_type)->paginate(12);
+                $companies = $companies->orderBy('company_id', 'DESC')->paginate(12);
             }
-        } else {
-            $companies = $this->search($category, $key);
-            $companies = $companies->orderBy('company_id', 'DESC')->paginate(12);
         }
         return view('company.companies-list', ['companies' => $companies, 'categories' => $categories]);
     }
@@ -55,9 +61,9 @@ class CompanyController extends Controller
     public function edit_view($id)
     {
         $company = Company::find($id);
-        if(!$company){
+        if (!$company) {
             return abort(403, 'Company Not found');
-           }
+        }
         if (count($company->categories()->get()) > 0) {
             for ($i = 1; $i <= count($company->categories()->get()); $i++) {
                 $selected[$i] = $i;
