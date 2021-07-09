@@ -5,6 +5,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TrainerController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,6 +68,12 @@ Route::middleware('check.login')->group(function () {
             Route::post('/custom-edit', [CategoryController::class, 'edit'])->name('custom.edit');
             Route::get('delete/{id}', [CategoryController::class, 'delete'])->name('delete');
             Route::get('deleteconfirm/{id}', [CategoryController::class, 'deleteconfirm'])->name('deleteconfirm');
+            Route::get('deleteallcategories', [CategoryController::class, 'deleteall'])->name('deleteallcategories');
+            //Import & export
+            Route::get('importExportView', [CategoryController::class, 'importExportView']);
+            Route::get('export', [CategoryController::class, 'export'])->name('export');
+            Route::post('import', [CategoryController::class, 'import'])->name('import');
+            Route::get('import-file', [CategoryController::class, 'route_import'])->name('import-file');
         });
     });
 });

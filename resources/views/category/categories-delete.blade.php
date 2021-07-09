@@ -9,24 +9,27 @@
         <div class="cotainer">
             <div class="row justify-content-center">
                 <table class="table table-bordered" style="text-align: center;">
-                    <thead >
+                    <thead>
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Category Name</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($cate as $category)
                         <tr>
                             <th scope="row">{{ $category->category_id }}</th>
                             <td>{{ $category->category_name }}</td>
                         </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
 
                 <div class="col-md-5">
                     <div class="card">
                         <div class="card-body" style="text-align: center;">
-                           
+
                             <a href="{{route('categories.delete', [$category->category_id])}}" class="btn btn-danger">
                                 <span class="menu-collapsed">yes</span>
                             </a>

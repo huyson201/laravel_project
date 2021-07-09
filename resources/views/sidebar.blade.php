@@ -96,6 +96,12 @@
                 <a href="{{route('categories.create')}}" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Add new</span>
                 </a>
+                <a href="{{route('categories.import-file')}}" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Import New Categories</span>
+                </a>
+                <a href="{{route('categories.export')}}" class="list-group-item list-group-item-action bg-dark text-white">
+                    <span class="menu-collapsed">Export All Categories</span>
+                </a>
             </div>
             <!--  -->
             <!-- Separator without title -->

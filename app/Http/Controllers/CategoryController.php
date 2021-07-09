@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CategoriesExport;
+use App\Imports\CategoriesImport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Category;
-use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -49,33 +51,24 @@ class CategoryController extends Controller
     }
     public function deleteconfirm($id)
     {
-        // if ($id == -1) {
-        //     $category = Category::orderBy('category_id', 'ASC');
-        // } else {
-            $category = Category::find($id);
-        // }
-        // if (count($category->get()) > 0) {
-        //     for ($i = 1; $i <= count($category->get()); $i++) {
-        //         $selected[$i] = $i;
-        //     };
-        // } else {
-        //     $selected = '';
-        // };
-        return view('category.categories-delete', [ 'category' => $category  ]);
+        $category = Category::find($id);
+
+        return view('category.categories-delete', ['category' => $category]);
     }
     public function delete($id)
     {
-        // dd($id);
-        // if(is_array( $id ))
-        // {
-        //     Category::all()->delete();
-        //     return redirect()->route('categories.list')->with('message', 'Deleted successfully!');
-
-        // }else{
         Category::find($id)->delete();
-        // }
         return redirect()->route('categories.list')->with('message', 'Deleted successfully!');
     }
+    public function deleteall()
+    {
+        $categories = Category::all();
+        foreach ($categories as $category) {
+            $category->delete();
+        }
+        return redirect()->route('categories.list')->with('message', 'Deleted All Categories successfully!');
+    }
+
 
     public function search(Request $request)
     {
@@ -84,5 +77,30 @@ class CategoryController extends Controller
             ->orWhere('category_name', 'Like', "%{$key}%")
             ->orderBy('category_id', 'ASC')->paginate(10)->appends($request->except('page'));
         return view('category.categories-list', ['cate' => $categories]);
+    }
+    //Import & export
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function export()
+    {
+        return Excel::download(new CategoriesExport, "List_Categories_" . time() . ".xlsx");
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function route_import()
+    {
+        return view('category.categories-io', []);
+    }
+    public function import(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            Excel::import(new CategoriesImport, request()->file('file'));
+            return back()->with('messages', 'Import successfully!');
+        } else {
+            return back()->with('message', "Wrong file or There's no file . Please choose a correct file !");
+        }
     }
 }
