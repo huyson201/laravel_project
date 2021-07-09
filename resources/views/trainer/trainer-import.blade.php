@@ -3,6 +3,13 @@
     <!-- MAIN -->
     <div class="col p-4">
         <div class="display-4">Import datas to "trainers" table</div>
+        @if ($errors->has('file_import'))
+            <p class="text-danger">{{ $errors->first('file_import') }}</p>
+        @else
+            @if ($errors->any())
+                <p class="text-danger">Import error! File's row format invalid</p>
+            @endif
+        @endif
 
         <div class="card mx-auto mt-5" style="width: 40%">
             <h5 class="card-header font-weight-light text-center">choose file</h5>

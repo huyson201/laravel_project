@@ -170,6 +170,9 @@ class TrainerController extends Controller
 
     public function import(Request $request)
     {
+        $request->validate([
+            'file_import'   =>  'required'
+        ]);
         Excel::import(new TrainerImport, $request->file_import);
         return redirect()->route('trainer.list')->with("import-message", 'Import successfully!');
     }
