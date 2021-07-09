@@ -3,7 +3,9 @@
 namespace App\Imports;
 
 
+use Illuminate\Console\OutputStyle;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -16,6 +18,15 @@ class TrainerImport implements ToCollection, WithHeadingRow
     {
 
         $data = array_map(function ($row) {
+            Validator::make($row, [
+                'trainer_id'        => 'required',
+                'trainer_name'      => 'required',
+                'trainer_phone'     =>  'required',
+                'company_id'        =>  'required',
+                'status'            =>  'required|nullable',
+                'created_at'        =>  'required',
+                'updated_at'        =>  'required',
+            ])->validate();
 
             return [
                 'trainer_id'        => $row['trainer_id'],

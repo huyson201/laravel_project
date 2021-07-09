@@ -11,7 +11,7 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-8">
-                            <input type="file" name="file_import" id="file_import">
+                            <input type="file" name="file_import" id="file_import" accept=".csv,.xlsx,.xls">
                         </div>
                         <div class="col-md-4"><button type="submit" class="btn btn-success">Import</button></div>
                     </div>
