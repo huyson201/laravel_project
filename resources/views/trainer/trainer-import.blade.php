@@ -12,7 +12,7 @@
         @endif
 
         <div class="card mx-auto mt-5" style="width: 40%">
-            <h5 class="card-header font-weight-light text-center">choose file</h5>
+            <h5 class="card-header font-weight-light text-center">Choose a file to import data</h5>
             <div class="card-body">
                 <form action="{{ route('trainer.import') }}" method="post" enctype="multipart/form-data">
                     @csrf

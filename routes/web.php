@@ -37,13 +37,17 @@ Route::middleware('check.login')->group(function () {
     Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
 
     Route::name('trainer.')->group(function () {
-        Route::get('/trainers', [TrainerController::class, 'index'])->name('list');
-        Route::get('/trainers/export', [TrainerController::class, 'export_view'])->name('export-view');
-        Route::get('/trainers/export-execute', [TrainerController::class, 'export'])->name('export');
-        Route::get('/trainers/import', [TrainerController::class, 'import_view'])->name('import-view');
-        Route::post('/trainers/import-execute', [TrainerController::class, 'import'])->name('import');
 
-        Route::get('/trainers/search', [TrainerController::class, 'search'])->name('search');
+
+        Route::prefix('trainers')->group(function () {
+            Route::get('/', [TrainerController::class, 'index'])->name('list');
+            Route::get('/export', [TrainerController::class, 'export_view'])->name('export-view');
+            Route::get('/export-execute', [TrainerController::class, 'export'])->name('export');
+            Route::get('/import', [TrainerController::class, 'import_view'])->name('import-view');
+            Route::post('/import-execute', [TrainerController::class, 'import'])->name('import');
+
+            Route::get('/search', [TrainerController::class, 'search'])->name('search');
+        });
 
         Route::prefix('trainer')->group(function () {
             Route::get('/edit/{id}', [TrainerController::class, 'edit_view'])->name('edit')->where('id', '[0-9]+');
