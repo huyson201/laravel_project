@@ -39,8 +39,6 @@
                                             <input type="text" placeholder="Name" id="phone" class="form-control"
                                                 name="company_phone" value="{{ $company->company_phone }}" required
                                                 autofocus>
-
-
                                         </div>
                                         @error('company_phone')
                                             <p class="text-danger">{{ $message }}</p>
@@ -135,5 +133,4 @@
             </main>
         </div><!-- Main Col END -->
     @endsection
-
 @endif

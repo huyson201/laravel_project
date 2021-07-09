@@ -29,7 +29,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name'      => 'required',
+            'name'      => 'required|unique:users,user_name',
             'email'     => 'required|email|unique:users,user_email',
             'password'  =>  'required|min:6',
             'cpassword' =>  'required|min:6|same:password'
