@@ -23,7 +23,7 @@ class TrainerImport implements ToCollection, WithHeadingRow
                 'trainer_name'      => 'required',
                 'trainer_phone'     =>  'required',
                 'company_id'        =>  'required',
-                'status'            =>  'required|nullable',
+                'status'            =>  'nullable',
                 'created_at'        =>  'required',
                 'updated_at'        =>  'required',
             ])->validate();
