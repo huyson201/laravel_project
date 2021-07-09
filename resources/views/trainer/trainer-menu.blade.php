@@ -14,6 +14,9 @@
     <a href="{{ route('trainer.create') }}" class="list-group-item list-group-item-action bg-dark text-white">
         <span class="menu-collapsed">Add new</span>
     </a>
+    <a href="{{ route('trainer.import-view') }}" class="list-group-item list-group-item-action bg-dark text-white">
+        <span class="menu-collapsed">Import</span>
+    </a>
     <a href="{{ route('trainer.export-view') }}" class="list-group-item list-group-item-action bg-dark text-white">
         <span class="menu-collapsed">Export</span>
     </a>

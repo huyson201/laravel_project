@@ -5,6 +5,7 @@
         <div class="col p-4">
             <h1 class="display-4">Edit Trainer</h1>
             <p class="text-success"> {{ session('success') }}</p>
+            <div class="mb-3"><a href="{{ route('trainer.list') }}" class="btn btn-success">Trainers list</a></div>
             <main class="signup-form mt-5">
                 <div class="cotainer">
                     <div class="row justify-content-center">
@@ -69,6 +70,7 @@
         <!-- MAIN -->
         <div class="col p-4">
             <h1 class="display-4">Add trainer</h1>
+            <div class="mb-3"><a href="{{ route('trainer.list') }}" class="btn btn-success">Trainers list</a></div>
             <main class="signup-form mt-5">
                 <div class="cotainer">
                     <div class="row justify-content-center">

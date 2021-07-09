@@ -15,13 +15,19 @@
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"
                                 aria-hidden="true"></i></button>
                     </div>
+                    @error('q')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </form>
             </div>
         </div>
         <div class="message">
+            <div class="text-success delete mb-3">{{ session('import-message') }}</div>
             <div class="text-success delete mb-3">{{ session('add-message') }}</div>
             <div class="text-success delete mb-3">{{ session('delete-message') }}</div>
         </div>
+        <div class="mb-3"><a href="{{ route('trainer.list') }}" class="btn btn-success">Trainers list</a> <a
+                href="{{ route('trainer.create') }}" class="btn btn-success">Add new</a></div>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -41,12 +47,13 @@
                         <td>{{ $trainer->trainer_phone }}</td>
                         <td>{{ $trainer->trainer_address }}</td>
                         @if (isset($trainer->company))
-                        <td>{{ ($trainer->company->company_name) }}</td>
+                            <td>{{ $trainer->company->company_name }}</td>
                         @else
-                        <td></td>
+                            <td></td>
                         @endif
                         <td class="text-nowrap">
-                            <a href="{{ route('trainer.edit', [$trainer->trainer_id]) }}" class="btn btn-success">Edit</a>
+                            <a href="{{ route('trainer.edit', [$trainer->trainer_id]) }}"
+                                class="btn btn-success">Edit</a>
                             <a href="{{ route('trainer.delete', [$trainer->trainer_id]) }}" class="btn btn-danger"
                                 onclick="return confirm('are you sure want to delete?')">Delete</a>
                         </td>

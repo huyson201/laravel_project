@@ -11,11 +11,11 @@ class TrainerExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Id',
-            'Name',
-            'Phone',
-            'Address',
-            'Company id',
+            'trainer_id',
+            'trainer_name',
+            'trainer_phone',
+            'trainer_address',
+            'company id',
             'status',
             'created_at',
             'updated_at',
