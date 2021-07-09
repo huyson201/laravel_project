@@ -116,4 +116,14 @@ class CompanyController extends Controller
         }
         return $companies;
     }
+
+    public function detail($id)
+    {
+        $company = Company::find($id);
+        if ($company == null || empty($company)) {
+            return abort(404, 'Company not found');
+        }
+
+        return view('company.company-detail', ['company'    => $company]);
+    }
 }

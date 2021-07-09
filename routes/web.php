@@ -38,7 +38,9 @@ Route::middleware('check.login')->group(function () {
 
     Route::name('trainer.')->group(function () {
 
-
+        /**
+         * Trainers route
+         */
         Route::prefix('trainers')->group(function () {
             Route::get('/', [TrainerController::class, 'index'])->name('list');
             Route::get('/export', [TrainerController::class, 'export_view'])->name('export-view');
@@ -49,6 +51,9 @@ Route::middleware('check.login')->group(function () {
             Route::get('/search', [TrainerController::class, 'search'])->name('search');
         });
 
+        /**
+         * Trainer route
+         */
         Route::prefix('trainer')->group(function () {
             Route::get('/edit/{id}', [TrainerController::class, 'edit_view'])->name('edit')->where('id', '[0-9]+');
             Route::post('/custom-edit', [TrainerController::class, 'edit'])->name('custom.edit');
@@ -66,6 +71,7 @@ Route::middleware('check.login')->group(function () {
             Route::get('/edit/{id}', [CompanyController::class, 'edit_view'])->name('edit');
             Route::post('/custom-edit', [CompanyController::class, 'edit'])->name('custom.edit');
             Route::get('delete/{id}', [CompanyController::class, 'delete'])->name('delete');
+            Route::get('/detail/{id}', [CompanyController::class, 'detail'])->name('detail');
         });
     });
 

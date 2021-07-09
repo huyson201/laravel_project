@@ -47,7 +47,7 @@
                         <td>{{ $trainer->trainer_phone }}</td>
                         <td>{{ $trainer->trainer_address }}</td>
                         @if (isset($trainer->company))
-                            <td>{{ $trainer->company->company_name }}</td>
+                            <td><a href="{{route('company.detail', [$trainer->company->company_id])}}">{{ $trainer->company->company_name }}</a></td>
                         @else
                             <td></td>
                         @endif
