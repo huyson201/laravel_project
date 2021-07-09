@@ -48,5 +48,6 @@
         </tbody>
     </table>
     {{ $cate->links() }}
+    <!-- <a class="btn btn-primary" href="{{ URL::to('/categories/pdf') }}">Export to PDF</a> -->
 </div><!-- Main Col END -->
 @endsection

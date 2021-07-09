@@ -16,7 +16,8 @@
                                 <input type="hidden" name="category_id" value="{{ $category->category_id }}">
                                 <div class="form-group mb-3">
                                     <label for="name">Category Name</label>
-                                    <input type="text" placeholder="Name" id="name" class="form-control" name="category_name" value="{{$category->category_name }}" required autofocus>
+                                    <input type="text" placeholder="Name" id="name" class="form-control" name="category_name"
+                                     value="{{$category->category_name }}" required autofocus>
                                 </div>
                                 @error('category_name')
                                 <p class="text-danger">{{ $message }}</p>
@@ -54,7 +55,8 @@
                                 <input type="hidden" name="category_id">
                                 <div class="form-group mb-3">
                                     <label for="name">Category Name</label>
-                                    <input type="text" placeholder="Name" id="name" class="form-control" name="category_name" required autofocus>
+                                    <input type="text" placeholder="Name" id="name" class="form-control" name="category_name" 
+                                    required autofocus>
                                 </div>
                                 @error('category_name')
                                 <p class="text-danger">{{ $message }}</p>

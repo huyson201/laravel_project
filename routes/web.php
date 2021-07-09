@@ -96,6 +96,14 @@ Route::middleware('check.login')->group(function () {
             Route::post('/custom-edit', [CategoryController::class, 'edit'])->name('custom.edit');
             Route::get('delete/{id}', [CategoryController::class, 'delete'])->name('delete');
             Route::get('deleteconfirm/{id}', [CategoryController::class, 'deleteconfirm'])->name('deleteconfirm');
+            Route::get('deleteallcategories', [CategoryController::class, 'deleteall'])->name('deleteallcategories');
+            //Import & export
+            Route::get('importExportView', [CategoryController::class, 'importExportView']);
+            Route::get('export', [CategoryController::class, 'export'])->name('export');
+            Route::get('exportpdf', [CategoryController::class, 'generatePDF'])->name('exportpdf');
+            Route::get('pdf', [CategoryController::class, 'generatePDF'])->name('pdf');
+            Route::post('import', [CategoryController::class, 'import'])->name('import');
+            Route::get('import-file', [CategoryController::class, 'route_import'])->name('import-file');
         });
     });
 });
