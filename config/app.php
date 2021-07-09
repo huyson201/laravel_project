@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         //Import & export
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -231,6 +232,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         //Import & export
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        
     ],
 
 ];

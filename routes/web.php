@@ -72,6 +72,8 @@ Route::middleware('check.login')->group(function () {
             //Import & export
             Route::get('importExportView', [CategoryController::class, 'importExportView']);
             Route::get('export', [CategoryController::class, 'export'])->name('export');
+            Route::get('exportpdf', [CategoryController::class, 'generatePDF'])->name('exportpdf');
+            Route::get('pdf', [CategoryController::class, 'generatePDF'])->name('pdf');
             Route::post('import', [CategoryController::class, 'import'])->name('import');
             Route::get('import-file', [CategoryController::class, 'route_import'])->name('import-file');
         });

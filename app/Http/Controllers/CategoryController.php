@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Exports\CategoriesExport;
 use App\Imports\CategoriesImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 class CategoryController extends Controller
 {
@@ -86,6 +87,14 @@ class CategoryController extends Controller
     {
         return Excel::download(new CategoriesExport, "List_Categories_" . time() . ".xlsx");
     }
+    // public function generatePDF()
+    // {
+    //     $data = Category::orderBy('category_id', 'ASC')->get()->toArray();
+    //     $listCategories = Category::orderBy('category_id', 'ASC')->paginate(15);
+    //     $pdf = PDF::loadView('category.categories-list', ['cate' =>$data, 'categories' => $data]);
+    
+    //     return $pdf->download('itsolutionstuff.pdf',);
+    // }
 
     /**
      * @return \Illuminate\Support\Collection
@@ -93,6 +102,11 @@ class CategoryController extends Controller
     public function route_import()
     {
         return view('category.categories-io', []);
+    }
+    public function route_pdf()
+    {
+        $listCategories = Category::orderBy('category_id', 'ASC');
+        return view('category.categories-pdf', ['cate' => $listCategories]);
     }
     public function import(Request $request)
     {
