@@ -19,7 +19,7 @@
             @csrf
             <input type="file" name="file" class="form-control">
             <br>
-            <button class="btn btn-success">Import User Data</button>
+            <button class="btn btn-success">Import Category Data</button>
             <a class="btn btn-warning" href="{{ route('categories.list') }}">List Categories</a>
         </form>
     </div>

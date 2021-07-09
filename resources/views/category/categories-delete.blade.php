@@ -31,7 +31,7 @@
                         <div class="card-body" style="text-align: center;">
 
                             <a href="{{route('categories.delete', [$category->category_id])}}" class="btn btn-danger">
-                                <span class="menu-collapsed">yes</span>
+                                <span class="menu-collapsed">Yes</span>
                             </a>
                             <a href="{{route('categories.list')}}" class="btn btn-secondary">
                                 <span class="menu-collapsed">Cancel</span>
