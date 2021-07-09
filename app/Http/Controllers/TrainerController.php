@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Exports\TrainerExport;
+use App\Imports\TrainerImport;
 use App\Models\Company;
 use App\Models\Trainer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Excel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TrainerController extends Controller
 {
@@ -139,6 +140,12 @@ class TrainerController extends Controller
         return view('trainer.trainer-export');
     }
 
+    /**
+     * export
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function export(Request $request)
     {
         $request->validate([
@@ -154,5 +161,19 @@ class TrainerController extends Controller
                 # code...
                 return redirect()->back()->with("export-message", "export fail!");
         }
+    }
+
+    public function import_view()
+    {
+        return view('trainer.trainer-import');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file_import'   =>  'required'
+        ]);
+        Excel::import(new TrainerImport, $request->file_import);
+        return redirect()->route('trainer.list')->with("import-message", 'Import successfully!');
     }
 }

@@ -5,6 +5,7 @@
         <div class="col p-4">
             <h1 class="display-4">Edit User</h1>
             <p class="text-success"> {{ session('message') }}</p>
+
             <main class="signup-form mt-5">
                 <div class="cotainer">
                     <div class="row justify-content-center">
@@ -31,8 +32,8 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Confirm User Password</label>
-                                            <input type="password" id="cfpassword" class="form-control" name="user_cfpassword"
-                                                value="">
+                                            <input type="password" id="cfpassword" class="form-control"
+                                                name="user_cfpassword" value="">
                                         </div>
                                         <div class="d-grid mx-auto">
                                             <button type="submit" class="btn btn-dark btn-block">Update</button>
@@ -51,6 +52,7 @@
         <!-- MAIN -->
         <div class="col p-4">
             <h1 class="display-4">Add user</h1>
+           
             <main class="signup-form mt-5">
                 <div class="cotainer">
                     <div class="row justify-content-center">
@@ -61,23 +63,23 @@
                                         @csrf
                                         <div class="form-group mb-3">
                                             <label>User Name</label>
-                                            <input type="text" id="username" placeholder="User Name ..." class="form-control" name="user_name" required
-                                                autofocus>
+                                            <input type="text" id="username" placeholder="User Name ..."
+                                                class="form-control" name="user_name" required autofocus>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>User Email</label>
-                                            <input type="text" id="email" placeholder="User Email ..." class="form-control" name="user_email" required
-                                                autofocus>
+                                            <input type="text" id="email" placeholder="User Email ..." class="form-control"
+                                                name="user_email" required autofocus>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>User Password</label>
-                                            <input type="password" id="password" placeholder="User Password ..." class="form-control" name="user_password"
-                                                required autofocus>
+                                            <input type="password" id="password" placeholder="User Password ..."
+                                                class="form-control" name="user_password" required autofocus>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label>Confirm User Password</label>
-                                            <input type="password" id="cfpassword" placeholder="Confirm Password ..." class="form-control" name="user_cfpassword"
-                                                required autofocus>
+                                            <input type="password" id="cfpassword" placeholder="Confirm Password ..."
+                                                class="form-control" name="user_cfpassword" required autofocus>
                                         </div>
                                         <div class="d-grid mx-auto">
                                             <button type="submit" class="btn btn-dark btn-block">Add</button>
