@@ -91,8 +91,6 @@
                     </td>
                 </tr>
                  @endforeach
-              
-              
             </tbody>
         </table>
         @else
@@ -101,13 +99,12 @@
         </tr>
         @endif
         {{ $companies->withQueryString()->links() }}
-    </div><!-- Main Col END -->
+    </div>
+    <!-- Main Col END -->
 @endsection
 @section('javascript')
     <script type="text/javascript">
         var query = <?php echo json_encode((object) Request::only(['category_id', 'k', 'sort', 'sort_type'])); ?>;
-        console.log(query);
-
         function sort(name, type) {
             Object.assign(query, {
                 'sort': name
