@@ -16,12 +16,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($cate as $category)
+                      
                         <tr>
                             <th scope="row">{{ $category->category_id }}</th>
                             <td>{{ $category->category_name }}</td>
                         </tr>
-                        @endforeach
+                      
 
                     </tbody>
                 </table>
