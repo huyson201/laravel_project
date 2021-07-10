@@ -24,17 +24,18 @@ class CompanyController extends Controller
             //Kiểm tra có request sắp xếp hay không
             if ($sort_name && $sort_type) {
                 //Nếu có request thì kiểm tra xem có thoả điều kiện sắp xếp theo id hoặc tên và sắp xếp tăng hay giảm không
-                if ($sort_name != 'company_id' && $sort_name != 'company_name' ||
-                    $sort_type != 'asc' && $sort_type != 'desc') {
+                if (
+                    $sort_name != 'company_id' && $sort_name != 'company_name' ||
+                    $sort_type != 'asc' && $sort_type != 'desc'
+                ) {
                     return abort(404, 'Not found'); // Không thoả điều kiện trả về trang 404 | NOT FOUND
                 }
                 // Kiểm tra xem có request tìm kiếm hay không
-                if($category && $key){
+                if ($category && $key) {
                     // Có thì tìm kiếm và sắp xếp
                     $companies = $this->search($category, $key);
                     $companies = $companies->orderBy($sort_name, $sort_type)->paginate(12);
-                }
-                else{
+                } else {
                     // Không thì chỉ sắp xếp
                     $companies = Company::orderBy($sort_name, $sort_type)->paginate(12);
                 }
@@ -78,7 +79,7 @@ class CompanyController extends Controller
                 $selected[$i] = $i;
             };
         } else {
-            $selected = ''; 
+            $selected = '';
         };
         $categories = Category::pluck('category_name', 'category_id');
         return view('company.company-form', ['company' => $company, 'categories' => $categories, 'selected' => $selected]);
@@ -110,17 +111,17 @@ class CompanyController extends Controller
         // Tìm kiếm theo toàn bộ categories và không có từ khoá
         if ($category == 0 && $key == null) {
             $companies = Company::whereHas('categories');
-        // Tìm kiếm theo toàn bộ categories và có từ khoá
+            // Tìm kiếm theo toàn bộ categories và có từ khoá
         } else if ($category == 0 && $key != null) {
             $companies = Company::whereHas('categories')
-            ->where(function ($query) use ($key) {
-                return $query->orWhere('company_name', 'Like', "%{$key}%")
-                    ->orWhere('company_web', 'Like', "%{$key}%")
-                    ->orWhere('company_address',  'Like', "%{$key}%")
-                    ->orWhere('company_phone',  'Like', "%{$key}%");
-            });
-        // Tìm kiếm theo category_id và có từ khoá 
-        } else if($category != 0 && $key != null){
+                ->where(function ($query) use ($key) {
+                    return $query->orWhere('company_name', 'Like', "%{$key}%")
+                        ->orWhere('company_web', 'Like', "%{$key}%")
+                        ->orWhere('company_address',  'Like', "%{$key}%")
+                        ->orWhere('company_phone',  'Like', "%{$key}%");
+                });
+            // Tìm kiếm theo category_id và có từ khoá
+        } else if ($category != 0 && $key != null) {
             $companies = Company::whereHas('categories', function ($query) use ($category) {
                 return $query->where('categories.category_id', '=', $category);
             })->where(function ($query) use ($key) {
@@ -131,7 +132,7 @@ class CompanyController extends Controller
             });
         }
         // Tìm kiếm theo category_id và không có từ khoá
-        else{
+        else {
             $companies = Company::whereHas('categories', function ($query) use ($category) {
                 return $query->where('categories.category_id', '=', $category);
             });
@@ -139,6 +140,11 @@ class CompanyController extends Controller
         return $companies;
     }
 
+    /**
+     * detail
+     * @param  mixed $id
+     * @return void
+     */
     public function detail($id)
     {
         $company = Company::find($id);

@@ -61,6 +61,7 @@ class CategoryController extends Controller
         Category::find($id)->delete();
         return redirect()->route('categories.list')->with('message', 'Deleted successfully!');
     }
+    
     public function deleteall()
     {
         $categories = Category::all();
@@ -92,7 +93,7 @@ class CategoryController extends Controller
     //     $data = Category::orderBy('category_id', 'ASC')->get()->toArray();
     //     $listCategories = Category::orderBy('category_id', 'ASC')->paginate(15);
     //     $pdf = PDF::loadView('category.categories-list', ['cate' =>$data, 'categories' => $data]);
-    
+
     //     return $pdf->download('itsolutionstuff.pdf',);
     // }
 
